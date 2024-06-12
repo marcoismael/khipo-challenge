@@ -1,0 +1,14 @@
+FROM node:18-slim
+
+RUN apt-get update -y
+RUN apt-get install -y openssl
+
+WORKDIR /usr/src/khipo-challange
+
+COPY . .
+
+RUN npm install --quiet --no-optional --no-fund --loglevel=error
+RUN npm run build
+EXPOSE 3000
+
+CMD [ "npm", "run","start:prod" ]
